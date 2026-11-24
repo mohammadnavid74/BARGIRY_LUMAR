@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>گزارش پروژه | LUMAR</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 12mm 14mm;
+      }
+
+      @font-face {
+        font-family: "IRANSans";
+        src: url("./fonts/IRANSans/IRANSansWeb(FaNum).eot"); /* IE9 Compat Modes */
+        src:
+          url("./fonts/IRANSans/IRANSansWeb(FaNum).eot?#iefix")
+            format("embedded-opentype"),
+          /* IE6-IE8 */ url("./fonts/IRANSans/IRANSansWeb(FaNum).ttf")
+            format("truetype"),
+          /* Safari, Android, iOS */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum).woff") format("woff"),
+          /* Modern Browsers */ url("./fonts/IRANSans/IRANSansWeb(FaNum).woff2")
+            format("woff2"); /* Modern Browsers */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "IRANSans_Light";
+        src: url("./fonts/IRANSans/IRANSansWeb(FaNum)_Light.eot"); /* IE9 Compat Modes */
+        src:
+          url("./fonts/IRANSans/IRANSansWeb(FaNum)_Light.eot?#iefix")
+            format("embedded-opentype"),
+          /* IE6-IE8 */ url("./fonts/IRANSans/IRANSansWeb(FaNum)_Light.ttf")
+            format("truetype"),
+          /* Safari, Android, iOS */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Light.woff") format("woff"),
+          /* Modern Browsers */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Light.woff2")
+            format("woff2"); /* Modern Browsers */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "IRANSans_Medium";
+        src: url("./fonts/IRANSans/IRANSansWeb(FaNum)_Medium.eot"); /* IE9 Compat Modes */
+        src:
+          url("./fonts/IRANSans/IRANSansWeb(FaNum)_Medium.eot?#iefix")
+            format("embedded-opentype"),
+          /* IE6-IE8 */ url("./fonts/IRANSans/IRANSansWeb(FaNum)_Medium.ttf")
+            format("truetype"),
+          /* Safari, Android, iOS */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Medium.woff") format("woff"),
+          /* Modern Browsers */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Medium.woff2")
+            format("woff2"); /* Modern Browsers */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "IRANSans_Bold";
+        src: url("./fonts/IRANSans/IRANSansWeb(FaNum)_Bold.eot"); /* IE9 Compat Modes */
+        src:
+          url("./fonts/IRANSans/IRANSansWeb(FaNum)_Bold.eot?#iefix")
+            format("embedded-opentype"),
+          /* IE6-IE8 */ url("./fonts/IRANSans/IRANSansWeb(FaNum)_Bold.ttf")
+            format("truetype"),
+          /* Safari, Android, iOS */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Bold.woff") format("woff"),
+          /* Modern Browsers */
+            url("./fonts/IRANSans/IRANSansWeb(FaNum)_Bold.woff2") format("woff2"); /* Modern Browsers */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "social-icons";
+        src: url("/fonts/social-icons.ttf") format("truetype"); /* Modern Browsers */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      .IRANSans {
+        font-family: IRANSans !important;
+      }
+
+      .IRANSans_Light {
+        font-family: IRANSans_Light !important;
+      }
+
+      .IRANSans_Medium {
+        font-family: IRANSans_Medium !important;
+      }
+
+      .IRANSans_Bold {
+        font-family: IRANSans_Bold !important;
+      }
+
+      * {
+        font-family: "IRANSans";
+      }
+
+      :root {
+        --ink: #252653;
+        --brand: #292765;
+        --brand-2: #3b3a8a;
+        --brand-soft: #eceaf7;
+        --line: #dcdbe8;
+        --muted: #6b6b8a;
+        --bg: #eef0f6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.9;
+        font-family: Vazirmatn, Tahoma, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(
+            1200px 400px at 50% -100px,
+            #dcdcf2 0%,
+            transparent 70%
+          ),
+          var(--bg);
+      }
+
+      /* Toolbar */
+      .actions {
+        width: 210mm;
+        max-width: 100%;
+        margin: 20px auto 0;
+        padding: 0 4px;
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        font: inherit;
+        font-size: 14px;
+        border: 0;
+        cursor: pointer;
+        padding: 9px 20px;
+        border-radius: 10px;
+        color: #fff;
+        background: var(--brand);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          background 0.15s;
+        box-shadow: 0 4px 14px #29276540;
+      }
+      button:hover {
+        transform: translateY(-1px);
+        background: var(--brand-2);
+      }
+      button:active {
+        transform: translateY(0);
+      }
+      button:focus-visible {
+        outline: 3px solid #8e8cd6;
+        outline-offset: 2px;
+      }
+      button.ghost {
+        background: #fff;
+        color: var(--brand);
+        box-shadow: inset 0 0 0 1.5px var(--line);
+      }
+      button.ghost:hover {
+        background: var(--brand-soft);
+      }
+      button.danger {
+        background: #b42343;
+        box-shadow: 0 4px 14px #b4234340;
+      }
+      button.danger:hover {
+        background: #961b37;
+      }
+
+      /* Page */
+      .page {
+        width: 210mm;
+        max-width: 100%;
+        min-height: 297mm;
+        margin: 14px auto 40px;
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow:
+          0 20px 60px #1d1c5a1f,
+          0 2px 6px #1d1c5a10;
+      }
+      .topbar {
+        height: 8px;
+        background: linear-gradient(
+          90deg,
+          var(--brand),
+          var(--brand-2) 60%,
+          #6c6bc0
+        );
+      }
+      .inner {
+        padding: 10px;
+      }
+
+      /* Header */
+      .report-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 8px 6px 14px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .report-header::after {
+        content: "";
+        position: absolute;
+        inset-inline-start: 0;
+        bottom: -1px;
+        width: 72px;
+        height: 3px;
+        border-radius: 3px;
+        background: linear-gradient(90deg, var(--brand), #8e8cd6);
+      }
+      .logo {
+        display: block;
+        height: 60px;
+        width: auto;
+        max-width: 45%;
+        object-fit: contain;
+        flex: none;
+      }
+      .document-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--brand);
+        line-height: 1.5;
+      }
+
+      /* Meta */
+      /* Meta */
+.meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 10px;
+  background: #f7f7fc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+.field label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-inline-start: 2px;
+}
+.meta input {
+  height: 28px;
+  padding: 2px 8px;
+  font-size: 12.5px;
+  border-width: 1px;
+  border-radius: 7px;
+}
+.meta input:focus {
+  box-shadow: 0 0 0 3px #3b3a8a1f;
+}
+      input,
+      textarea {
+        font: inherit;
+        font-size: 14px;
+        color: #1d1d33;
+        width: 100%;
+        min-width: 0;
+        background: #fff;
+        border: 1.5px solid var(--line);
+        border-radius: 10px;
+        padding: 7px 12px;
+        outline: none;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #a6a6bf;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: var(--brand-2);
+        box-shadow: 0 0 0 4px #3b3a8a1f;
+      }
+      input[readonly] {
+        background: transparent;
+        border-style: dashed;
+        color: var(--brand);
+        font-weight: 700;
+      }
+
+      /* Sections */
+      .section {
+        margin: 18px 0;
+        break-inside: avoid;
+      }
+      .section h3 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 800;
+        margin: 0 0 8px;
+        color: var(--brand);
+      }
+      .section h3::before {
+        content: "";
+        width: 5px;
+        height: 20px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, var(--brand), #8e8cd6);
+      }
+      textarea {
+        display: block;
+        min-height: 100px;
+        padding: 11px 14px;
+        resize: vertical;
+        line-height: 2;
+      }
+      #summary {
+        min-height: 85px;
+      }
+      #details {
+        min-height: 150px;
+      }
+      #conclusion {
+        min-height: 90px;
+      }
+
+      .footer {
+        margin-top: 30px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        background: var(--brand-soft);
+        color: var(--brand);
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* Dynamic sections */
+      .sec-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 8px;
+      }
+      .sec-head::before {
+        content: "";
+        flex: none;
+        width: 5px;
+        height: 22px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, var(--brand), #8e8cd6);
+      }
+      .sec-head .num {
+        font-weight: 800;
+        color: var(--brand);
+        font-size: 15px;
+        flex: none;
+      }
+      .sec-head .sec-title {
+        flex: 1;
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--brand);
+        background: transparent;
+        border: 1.5px solid transparent;
+        padding: 3px 8px;
+      }
+      .sec-head .sec-title:hover {
+        border-color: var(--line);
+      }
+      .sec-head .sec-title:focus {
+        background: #fff;
+        border-color: var(--brand-2);
+      }
+      .icon-btn {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border-radius: 8px;
+        font-size: 18px;
+        line-height: 1;
+        background: #fff;
+        color: #b42343;
+        box-shadow: inset 0 0 0 1.5px var(--line);
+      }
+      .icon-btn:hover {
+        background: #fdecef;
+        transform: none;
+      }
+      .add-btn {
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px;
+        background: transparent;
+        color: var(--brand);
+        border: 2px dashed #b9b8dd;
+        box-shadow: none;
+        font-weight: 700;
+      }
+      .add-btn:hover {
+        background: var(--brand-soft);
+        transform: none;
+      }
+      .empty-note {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        padding: 14px 0;
+      }
+      @media print {
+        .icon-btn,
+        .add-btn,
+        .empty-note {
+          display: none !important;
+        }
+        .sec-head .sec-title {
+          border-color: transparent !important;
+          padding-inline: 0;
+        }
+      }
+
+      /* Confirm dialog (replaces window.confirm, which is blocked in many embedded/sandboxed views) */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #14143a73;
+        backdrop-filter: blur(3px);
+        z-index: 50;
+        padding: 16px;
+      }
+      .overlay.open {
+        display: flex;
+      }
+      .dialog {
+        background: #fff;
+        border-radius: 16px;
+        padding: 24px;
+        width: 100%;
+        max-width: 380px;
+        box-shadow: 0 24px 70px #14143a55;
+        text-align: center;
+        animation: pop 0.18s ease-out;
+      }
+      .dialog h4 {
+        margin: 0 0 6px;
+        font-size: 17px;
+        color: var(--brand);
+      }
+      .dialog p {
+        margin: 0 0 20px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .dialog .row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.95);
+          opacity: 0;
+        }
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translate(-50%, 20px);
+        background: var(--brand);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s;
+        z-index: 60;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+        .page {
+          margin: 0;
+          width: auto;
+          min-height: auto;
+          box-shadow: none;
+          border-radius: 0;
+        }
+        .inner {
+          padding: 0;
+        }
+        .actions,
+        .overlay,
+        .toast {
+          display: none !important;
+        }
+        input,
+        textarea {
+          border-color: #cfcfdc;
+          box-shadow: none;
+        }
+        textarea {
+          overflow: visible;
+          resize: none;
+        }
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+      @media screen and (max-width: 850px) {
+        .actions {
+          padding: 0 12px;
+        }
+        .page {
+          border-radius: 0;
+          margin-top: 12px;
+        }
+        .logo {
+          height: 38px;
+        }
+        .document-title {
+          font-size: 15px;
+        }
+        .inner {
+          padding: 18px;
+        }
+        .meta {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="actions">
+      <button type="button" onclick="window.print()">چاپ / ذخیره PDF</button>
+      <button type="button" class="ghost" onclick="askClear()">
+        پاک کردن فرم
+      </button>
+    </div>
+
+    <main class="page">
+      <div class="topbar"></div>
+      <div class="inner">
+        <header class="report-header">
+          <img
+            class="logo"
+            src="./IMG_0087.jpeg"
+            alt="LUMAR - Born From Stone"
+          />
+          <h1 class="document-title">گزارش وضعیت و شرح پروژه</h1>
+        </header>
+
+        <section class="meta">
+          <div class="field">
+            <label for="client">نام کارفرما</label
+            ><input id="client" type="text" placeholder="نام شخص یا شرکت" />
+          </div>
+          <div class="field">
+            <label for="projectCode">کد پروژه</label
+            ><input
+              id="projectCode"
+              type="text"
+              placeholder="مثلاً LMR-1405-001"
+              dir="ltr"
+            />
+          </div>
+          <div class="field">
+            <label for="projectName">عنوان پروژه</label
+            ><input
+              id="projectName"
+              type="text"
+              placeholder="عنوان یا نام پروژه"
+            />
+          </div>
+          <div class="field">
+            <label for="reportDate">تاریخ گزارش</label
+            ><input id="reportDate" type="text" readonly />
+          </div>
+          <div class="field">
+            <label for="contact">راه ارتباطی</label
+            ><input id="contact" type="text" placeholder="شماره تماس / ایمیل" />
+          </div>
+          <div class="field">
+            <label for="reporter">تهیه‌کننده گزارش</label
+            ><input id="reporter" type="text" placeholder="نام و سمت" />
+          </div>
+        </section>
+
+        <div id="sections"></div>
+        <button type="button" class="add-btn" onclick="addSection()">
+          + افزودن سرفصل جدید
+        </button>
+
+        <footer class="footer">
+          <span>LUMAR | BORN FROM STONE</span>
+          <span>گزارش پروژه — سند داخلی / قابل ارائه به کارفرما</span>
+        </footer>
+      </div>
+    </main>
+
+    <div
+      class="overlay"
+      id="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dlgTitle"
+    >
+      <div class="dialog">
+        <h4 id="dlgTitle"></h4>
+        <p id="dlgText"></p>
+        <div class="row">
+          <button type="button" class="danger" id="dlgOk">تأیید</button>
+          <button type="button" class="ghost" onclick="closeDialog()">
+            انصراف
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const DEFAULT_SECTIONS = [
+        [
+          "خلاصه پروژه",
+          "خلاصه‌ای از موضوع، هدف و محدوده پروژه را وارد کنید...",
+        ],
+        [
+          "شرح اقدامات و جزئیات انجام‌شده",
+          "اقدامات انجام‌شده، مراحل اجرا، مشخصات متریال، ابعاد، مقادیر یا توضیحات فنی را وارد کنید...",
+        ],
+        [
+          "وضعیت فعلی پروژه",
+          "وضعیت پیشرفت، موارد تکمیل‌شده و موارد در حال انجام را شرح دهید...",
+        ],
+        [
+          "موارد نیازمند تصمیم یا پیگیری",
+          "موارد باز، نیازمندی‌ها، تأییدیه‌های کارفرما یا اقدامات بعدی...",
+        ],
+        ["جمع‌بندی و پیشنهاد", "نتیجه‌گیری، پیشنهادها و برنامه ادامه کار..."],
+      ];
+      const box = document.getElementById("sections");
+
+      function esc(v) {
+        return v
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;");
+      }
+
+      function addSection(
+        title = "",
+        placeholder = "متن این سرفصل را وارد کنید...",
+        focus = true,
+      ) {
+        const el = document.createElement("section");
+        el.className = "section";
+        el.innerHTML =
+          '<div class="sec-head"><span class="num"></span>' +
+          '<input class="sec-title" type="text" placeholder="عنوان سرفصل" aria-label="عنوان سرفصل" value="' +
+          esc(title) +
+          '">' +
+          '<button type="button" class="icon-btn" title="حذف سرفصل" aria-label="حذف سرفصل">×</button></div>' +
+          '<textarea placeholder="' +
+          esc(placeholder) +
+          '"></textarea>';
+        el.querySelector(".icon-btn").onclick = () => removeSection(el);
+        box.appendChild(el);
+        renumber();
+        if (focus) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.querySelector(".sec-title").focus();
+        }
+      }
+
+      function removeSection(el) {
+        const hasText = el.querySelector("textarea").value.trim() !== "";
+        const doRemove = () => {
+          el.remove();
+          renumber();
+        };
+        if (!hasText) return doRemove();
+        askConfirm(
+          "حذف سرفصل",
+          "این سرفصل و متن آن حذف می‌شود و قابل بازگشت نیست.",
+          "بله، حذف شود",
+          doRemove,
+        );
+      }
+
+      function renumber() {
+        const items = box.querySelectorAll(".section");
+        items.forEach((s, i) => {
+          s.querySelector(".num").textContent =
+            (i + 1).toLocaleString("fa-IR") + ".";
+        });
+        let note = document.getElementById("emptyNote");
+        if (!items.length && !note) {
+          note = document.createElement("div");
+          note.id = "emptyNote";
+          note.className = "empty-note";
+          note.textContent =
+            "هیچ سرفصلی وجود ندارد. با دکمه زیر یک سرفصل اضافه کنید.";
+          box.after(note);
+        } else if (items.length && note) note.remove();
+      }
+
+      function updatePersianDate() {
+        document.getElementById("reportDate").value = new Intl.DateTimeFormat(
+          "fa-IR-u-ca-persian",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          },
+        ).format(new Date());
+      }
+
+      let pending = null;
+      function askConfirm(title, text, okLabel, fn) {
+        document.getElementById("dlgTitle").textContent = title;
+        document.getElementById("dlgText").textContent = text;
+        const ok = document.getElementById("dlgOk");
+        ok.textContent = okLabel;
+        pending = fn;
+        ok.onclick = () => {
+          const f = pending;
+          closeDialog();
+          if (f) f();
+        };
+        document.getElementById("overlay").classList.add("open");
+      }
+      function closeDialog() {
+        pending = null;
+        document.getElementById("overlay").classList.remove("open");
+      }
+
+      function toast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 1800);
+      }
+
+      function askClear() {
+        askConfirm(
+          "پاک کردن فرم",
+          "تمام اطلاعات واردشده حذف می‌شود (سرفصل‌ها باقی می‌مانند).",
+          "بله، پاک شود",
+          clearReport,
+        );
+      }
+      function clearReport() {
+        document
+          .querySelectorAll("input:not([readonly]):not(.sec-title), textarea")
+          .forEach((el) => {
+            el.value = "";
+          });
+        updatePersianDate();
+        toast("فرم پاک شد");
+      }
+
+      document.getElementById("overlay").addEventListener("click", (e) => {
+        if (e.target.id === "overlay") closeDialog();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeDialog();
+      });
+
+      DEFAULT_SECTIONS.forEach(([t, p]) => addSection(t, p, false));
+      updatePersianDate();
+    </script>
+  </body>
+</html>
