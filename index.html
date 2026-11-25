@@ -1,168 +1,895 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>فرم بارگیری لومار</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f2f4f9;--card:#fff;--ink:#17213b;--mut:#6b7691;--pri:#1f2f5c;--acc:#e8a317;--line:#dde2ee;--ok:#16915a;--err:#d6372f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1526;--card:#171f36;--ink:#e8ecf7;--mut:#93a0c0;--pri:#8fa6ee;--acc:#f0b43a;--line:#2a3558;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0f1526;--card:#171f36;--ink:#e8ecf7;--mut:#93a0c0;--pri:#8fa6ee;--acc:#f0b43a;--line:#2a3558;color-scheme:dark}
-@font-face{font-family:"IRANSans";src:url("./fonts/IRANSans/IRANSansWeb(FaNum).woff2") format("woff2"),url("./fonts/IRANSans/IRANSansWeb(FaNum).woff") format("woff"),url("./fonts/IRANSans/IRANSansWeb(FaNum).ttf") format("truetype");font-weight:normal;font-style:normal}
-*{font-family:"IRANSans"}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:20px 14px 60px}
-header{background:linear-gradient(135deg,#1f2f5c,#31488f);color:#fff;border-radius:12px;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:3px solid var(--acc)}
-.logo{font-weight:800;font-size:20px;letter-spacing:1px;line-height:1.3}.logo span{color:var(--acc)}
-header h1{margin:0;font-size:15px;font-weight:600}
-.meta{font-size:15px;opacity:.9;text-align:left}
-.sh-foot{display:none}
-.hlogo{height:60px;width:auto;border-radius:8px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px;box-shadow:0 4px 18px rgba(20,30,60,.05)}
-h2{margin:0 0 14px;font-size:16px;color:var(--pri)}
-h2:before{content:"";display:inline-block;width:6px;height:16px;background:var(--acc);border-radius:3px;margin-left:8px;vertical-align:-2px}
-.frow{display:grid;grid-template-columns:2.4fr 1.1fr 1.1fr auto;gap:10px;align-items:end}
-@media(max-width:640px){.frow{grid-template-columns:1fr 1fr}.frow .combo{grid-column:1/-1}}
-input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
-label{display:block;font-size:13px;color:var(--mut);margin-bottom:4px}
-input,select{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
-input:focus,select:focus{outline:2px solid var(--acc);border-color:transparent}
-.combo{position:relative}
-.list{position:absolute;inset-inline:0;top:100%;margin-top:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;max-height:260px;overflow:auto;z-index:20;display:none;box-shadow:0 10px 30px rgba(0,0,0,.15)}
-.list.open{display:block}
-.opt{padding:9px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-size:14px;border-bottom:1px solid var(--line)}
-.opt:hover,.opt.on{background:rgba(232,163,23,.16)}
-.opt b{color:var(--pri);direction:ltr;font-weight:600;white-space:nowrap}
-.opt.none{color:var(--mut);cursor:default}
-.chosen{margin-top:8px;font-size:13px;color:var(--ok);min-height:20px}
-.perm{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px dashed var(--line);border-radius:10px;cursor:pointer;margin:0;white-space:nowrap;font-size:13px}
-.perm input{width:20px;height:20px;accent-color:var(--ok);margin:0}
-.perm.bad{border-color:var(--err);background:rgba(214,55,47,.08)}
-.err{color:var(--err);font-size:12.5px;margin-top:4px}.err:empty{display:none}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:560px}
-th{background:var(--pri);color:#fff;font-weight:600;font-size:12px;padding:7px 2px}
-th:first-child{border-radius:0 10px 0 0}th:last-child{border-radius:10px 0 0 0}
-td{padding:6px 4px;border-bottom:1px solid var(--line)}
-td input,td select{padding:6px 3px;border-radius:7px;font-size:13px;text-align:center}
-td:nth-child(2) input{text-align:right;padding-inline:8px}
-td.n{text-align:center;color:var(--mut)}
-.qwrap{display:flex;gap:4px;align-items:center}
-.qwrap input{flex:1;min-width:0}
-.qwrap select{width:46%;flex:none}
-.x{border:0;background:none;color:var(--err);font-size:20px;cursor:pointer}
-.btn{font:inherit;border:0;border-radius:10px;padding:10px 20px;cursor:pointer;font-weight:600}
-.add{background:rgba(232,163,23,.18);color:var(--ink);margin-top:12px}
-.print{background:var(--acc);color:#1b1b1b;font-size:16px;padding:12px 34px}
-.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
-.sigs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:640px){.sigs{grid-template-columns:1fr}}
-.sig{border:1.5px solid var(--line);border-radius:12px;height:170px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
-.sig small{color:var(--mut);font-size:12px;display:block}
-.sig .ln{border-top:1px dashed var(--mut);padding-top:4px;font-size:12px;color:var(--mut)}
-.bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-@page{size:A5 portrait;margin:8mm 8mm 13mm}
-@media print{
-:root{--bg:#fff;--card:#fff;--ink:#000;--mut:#333;--line:#777;color-scheme:light;padding:0}
-*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-html,body{background:#fff;font-size:10.5px;line-height:1.4}
-.no,.x,.add,h2,.err,.list{display:none!important}
-.wrap{padding:0;max-width:none}
-.shell{display:table;width:100%}.sh-head{display:table-header-group}.sh-body{display:table-row-group}.sh-row{display:table-row}.sh-cell{display:table-cell}
-header{padding:4px 8px;border-radius:6px;gap:8px}.hlogo{height:15mm;border-radius:5px}header h1{font-size:12px}.meta{font-size:15px}
-.card{box-shadow:none;border:0;border-radius:0;padding:0;margin-top:3mm}
-label{font-size:8.5px;margin:0 0 1px}
-input:not([type=checkbox]),select{border:0;background:none;padding:0 2px;height:6mm;font-size:11px;appearance:none;-webkit-appearance:none}
-.frow{display:flex;align-items:baseline;gap:3mm;padding:1.8mm 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);white-space:nowrap}
-.frow>div{display:flex;align-items:baseline;gap:1.5mm}
-.frow .combo{flex:1 1 auto;min-width:0;display:flex}
-.frow label{display:inline;font-size:9.5px;color:var(--mut);margin:0}
-.frow label:not(.perm)::after{content:":"}
-.frow input:not([type=checkbox]){height:auto;padding:0;font-weight:600;text-overflow:ellipsis}
-.frow .combo input{flex:1;width:auto;min-width:0}
-.frow>div:not(.combo){flex:none}
-#pcode{width:17mm}#exit{width:12mm}
-.perm{border:0;padding:0;gap:1.5mm;font-size:10.5px}.perm input{width:3.5mm;height:3.5mm}.perm b{display:none}
-.tw{overflow:visible}
-table{min-width:0;border:1px solid var(--line)}
-thead{display:table-header-group}tr{break-inside:avoid}
-th,td{border:1px solid var(--line)}
-th{font-size:10px;padding:3px 1px;border-radius:0}
-td{padding:0}
-td input,td select{height:7mm;text-align:center}
-td:nth-child(2) input{text-align:right;padding-inline:4px}
-.sigs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:3mm;break-inside:avoid}
-.sig{height:17mm;padding:1.5mm 2mm;border:1px solid var(--line);border-radius:3px;break-inside:avoid}
-.sig b{font-size:9.5px;display:block}.sig small{font-size:7.5px;line-height:1.3}.sig .ln{display:none}
-th:first-child,td.n{display:none}
-::placeholder{color:transparent}
-.sh-foot{display:table-footer-group}.sh-foot .sh-cell{height:22mm}
-.sigcard{position:fixed;bottom:0;left:0;right:0;margin:0;background:#fff}
-.qwrap{display:flex;align-items:center;gap:1mm;padding:0 1mm}
-.qwrap input{flex:1;min-width:0;font-weight:600}
-.qwrap select{flex:none;width:13mm;height:auto;text-align:right;font-size:7.5px;font-weight:400;color:#888}
-}
-</style>
-</head>
-<body>
-<div class="wrap">
-<div class="shell"><div class="sh-head"><div class="sh-row"><div class="sh-cell">
-<header>
- <h1>فرم بارگیری و مجوز خروج</h1>
- <img class="hlogo" src="./logo.jpeg" alt="Lomar" onerror="this.style.display='none'">
- <div class="meta">تاریخ: <span id="date"></span></div>
-</header>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>فرم بارگیری لومار</title>
+ 
+    <style>
+      :root {
+        --bg: #f2f4f9;
+        --card: #fff;
+        --ink: #17213b;
+        --mut: #6b7691;
+        --pri: #1f2f5c;
+        --acc: #e8a317;
+        --line: #dde2ee;
+        --ok: #16915a;
+        --err: #d6372f;
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0f1526;
+          --card: #171f36;
+          --ink: #e8ecf7;
+          --mut: #93a0c0;
+          --pri: #8fa6ee;
+          --acc: #f0b43a;
+          --line: #2a3558;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0f1526;
+        --card: #171f36;
+        --ink: #e8ecf7;
+        --mut: #93a0c0;
+        --pri: #8fa6ee;
+        --acc: #f0b43a;
+        --line: #2a3558;
+        color-scheme: dark;
+      }
+      @font-face {
+        font-family: "IRANSans";
+        src:
+          url("./fonts/IRANSans/IRANSansWeb(FaNum).woff2") format("woff2"),
+          url("./fonts/IRANSans/IRANSansWeb(FaNum).woff") format("woff"),
+          url("./fonts/IRANSans/IRANSansWeb(FaNum).ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      * {
+        font-family: "IRANSans";
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Vazirmatn, Tahoma, sans-serif;
+        line-height: 1.7;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 20px 14px 60px;
+      }
+      header {
+        background: linear-gradient(135deg, #1f2f5c, #31488f);
+        color: #fff;
+        border-radius: 12px;
+        padding: 8px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 3px solid var(--acc);
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 20px;
+        letter-spacing: 1px;
+        line-height: 1.3;
+      }
+      .logo span {
+        color: var(--acc);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .meta {
+        font-size: 15px;
+        opacity: 0.9;
+        text-align: left;
+      }
+      .sh-foot {
+        display: none;
+      }
+      .hlogo {
+        height: 60px;
+        width: auto;
+        border-radius: 8px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        margin-top: 12px;
+        box-shadow: 0 4px 18px rgba(20, 30, 60, 0.05);
+      }
+      h2 {
+        margin: 0 0 14px;
+        font-size: 16px;
+        color: var(--pri);
+      }
+      h2:before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 16px;
+        background: var(--acc);
+        border-radius: 3px;
+        margin-left: 8px;
+        vertical-align: -2px;
+      }
+      .frow {
+        display: grid;
+        grid-template-columns: 2.4fr 1.1fr 1.1fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+      @media (max-width: 640px) {
+        .frow {
+          grid-template-columns: 1fr 1fr;
+        }
+        .frow .combo {
+          grid-column: 1/-1;
+        }
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        color: var(--mut);
+        margin-bottom: 4px;
+      }
+      input,
+      select {
+        width: 100%;
+        font: inherit;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      input:focus,
+      select:focus {
+        outline: 2px solid var(--acc);
+        border-color: transparent;
+      }
+      .combo {
+        position: relative;
+      }
+      .list {
+        position: absolute;
+        inset-inline: 0;
+        top: 100%;
+        margin-top: 4px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        max-height: 260px;
+        overflow: auto;
+        z-index: 20;
+        display: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+      .list.open {
+        display: block;
+      }
+      .opt {
+        padding: 9px 14px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .opt:hover,
+      .opt.on {
+        background: rgba(232, 163, 23, 0.16);
+      }
+      .opt b {
+        color: var(--pri);
+        direction: ltr;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .opt.none {
+        color: var(--mut);
+        cursor: default;
+      }
+      .chosen {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--ok);
+        min-height: 20px;
+      }
+      .perm {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border: 1.5px dashed var(--line);
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 0;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+      .perm input {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--ok);
+        margin: 0;
+      }
+      .perm.bad {
+        border-color: var(--err);
+        background: rgba(214, 55, 47, 0.08);
+      }
+      .err {
+        color: var(--err);
+        font-size: 12.5px;
+        margin-top: 4px;
+      }
+      .err:empty {
+        display: none;
+      }
+      .tw {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 560px;
+      }
+      th {
+        background: var(--pri);
+        color: #fff;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 7px 2px;
+      }
+      th:first-child {
+        border-radius: 0 10px 0 0;
+      }
+      th:last-child {
+        border-radius: 10px 0 0 0;
+      }
+      td {
+        padding: 6px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+      td input,
+      td select {
+        padding: 6px 3px;
+        border-radius: 7px;
+        font-size: 13px;
+        text-align: center;
+      }
+      td:nth-child(2) input {
+        text-align: right;
+        padding-inline: 8px;
+      }
+      td.n {
+        text-align: center;
+        color: var(--mut);
+      }
+      .qwrap {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+      .qwrap input {
+        flex: 1;
+        min-width: 0;
+      }
+      .qwrap select {
+        width: 46%;
+        flex: none;
+      }
+      .x {
+        border: 0;
+        background: none;
+        color: var(--err);
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .btn {
+        font: inherit;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .add {
+        background: rgba(232, 163, 23, 0.18);
+        color: var(--ink);
+        margin-top: 12px;
+      }
+      .print {
+        background: var(--acc);
+        color: #1b1b1b;
+        font-size: 16px;
+        padding: 12px 34px;
+      }
+      .ghost {
+        background: var(--bg);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .sigs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 640px) {
+        .sigs {
+          grid-template-columns: 1fr;
+        }
+      }
+      .sig {
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        min-height: 170px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+      .sig small {
+        color: var(--mut);
+        font-size: 12px;
+        display: block;
+      }
+      .sig .ln {
+        border-top: 1px dashed var(--mut);
+        padding-top: 4px;
+        font-size: 12px;
+        color: var(--mut);
+      }
+      .sf {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 8px 0;
+      }
+      .sig input {
+        text-align: center;
+      }
+      .plate:not(:placeholder-shown) {
+        direction: ltr;
+        unicode-bidi: bidi-override;
+      }
+      .tg {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        margin: 0;
+        font-size: 13px;
+        color: var(--ink);
+      }
+      .tg input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--ok);
+        margin: 0;
+      }
+      #noteBox {
+        margin-top: 10px;
+      }
+      #noteBox[hidden] {
+        display: none;
+      }
+      textarea {
+        width: 100%;
+        font: inherit;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--ink);
+        resize: vertical;
+        margin-top: 4px;
+      }
+      #notePrint {
+        display: none;
+      }
+      .bar {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+      @page {
+        size: A5 portrait;
+        margin: 8mm 8mm 13mm;
+      }
+      @media print {
+        :root {
+          --bg: #fff;
+          --card: #fff;
+          --ink: #000;
+          --mut: #333;
+          --line: #777;
+          color-scheme: light;
+          padding: 0;
+        }
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        html,
+        body {
+          background: #fff;
+          font-size: 10.5px;
+          line-height: 1.4;
+        }
+        .no,
+        .x,
+        .add,
+        h2,
+        .err,
+        .list {
+          display: none !important;
+        }
+        .wrap {
+          padding: 0;
+          max-width: none;
+        }
+        .shell {
+          display: table;
+          width: 100%;
+        }
+        .sh-head {
+          display: table-header-group;
+        }
+        .sh-body {
+          display: table-row-group;
+        }
+        .sh-row {
+          display: table-row;
+        }
+        .sh-cell {
+          display: table-cell;
+        }
+        header {
+          padding: 4px 8px;
+          border-radius: 6px;
+          gap: 8px;
+        }
+        .hlogo {
+          height: 15mm;
+          border-radius: 5px;
+        }
+        header h1 {
+          font-size: 12px;
+        }
+        .meta {
+          font-size: 15px;
+        }
+        .card {
+          box-shadow: none;
+          border: 0;
+          border-radius: 0;
+          padding: 0;
+          margin-top: 3mm;
+        }
+        label {
+          font-size: 8.5px;
+          margin: 0 0 1px;
+        }
+        input:not([type="checkbox"]),
+        select {
+          border: 0;
+          background: none;
+          padding: 0 2px;
+          height: 6mm;
+          font-size: 11px;
+          appearance: none;
+          -webkit-appearance: none;
+        }
+        .frow {
+          display: flex;
+          align-items: baseline;
+          gap: 3mm;
+          padding: 1.8mm 0;
+          border-top: 1px solid var(--line);
+          border-bottom: 1px solid var(--line);
+          white-space: nowrap;
+        }
+        .frow > div {
+          display: flex;
+          align-items: baseline;
+          gap: 1.5mm;
+        }
+        .frow .combo {
+          flex: 1 1 auto;
+          min-width: 0;
+          display: flex;
+        }
+        .frow label {
+          display: inline;
+          font-size: 9.5px;
+          color: var(--mut);
+          margin: 0;
+        }
+        .frow label:not(.perm)::after {
+          content: ":";
+        }
+        .frow input:not([type="checkbox"]) {
+          height: auto;
+          padding: 0;
+          font-weight: 600;
+          text-overflow: ellipsis;
+        }
+        .frow .combo input {
+          flex: 1;
+          width: auto;
+          min-width: 0;
+        }
+        .frow > div:not(.combo) {
+          flex: none;
+        }
+        #pcode {
+          width: 17mm;
+        }
+        #exit {
+          width: 12mm;
+        }
+        .perm {
+          border: 0;
+          padding: 0;
+          gap: 1.5mm;
+          font-size: 10.5px;
+        }
+        .perm input {
+          width: 3.5mm;
+          height: 3.5mm;
+        }
+        .perm b {
+          display: none;
+        }
+        .tw {
+          overflow: visible;
+        }
+        table {
+          min-width: 0;
+          border: 1px solid var(--line);
+        }
+        thead {
+          display: table-header-group;
+        }
+        tr {
+          break-inside: avoid;
+        }
+        th,
+        td {
+          border: 1px solid var(--line);
+        }
+        th {
+          font-size: 10px;
+          padding: 3px 1px;
+          border-radius: 0;
+        }
+        td {
+          padding: 0;
+        }
+        td input,
+        td select {
+          height: 7mm;
+          text-align: center;
+        }
+        td:nth-child(2) input {
+          text-align: right;
+          padding-inline: 4px;
+        }
+        .sigs {
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 3mm;
+          break-inside: avoid;
+        }
+        .sig {
+          min-height: 0;
+          height: 21mm;
+          padding: 1.5mm 2mm;
+          border: 1px solid var(--line);
+          border-radius: 3px;
+          break-inside: avoid;
+        }
+        .sig b {
+          font-size: 9.5px;
+          display: block;
+        }
+        .sig small {
+          font-size: 7.5px;
+          line-height: 1.3;
+        }
+        .sig .ln {
+          display: none;
+        }
+        th:first-child,
+        td.n {
+          display: none;
+        }
+        ::placeholder {
+          color: transparent;
+        }
+        .sig {
+          justify-content: flex-start;
+          gap: 1mm;
+        }
+        .sf {
+          display: flex;
+          flex-direction: row;
+          gap: 1mm;
+          margin: 1mm 0 0;
+        }
+        .sf input {
+          flex: 1;
+          min-width: 0;
+        }
+        .sig input {
+          height: 5mm;
+          font-size: 8.5px;
+          font-weight: 600;
+          text-align: center;
+        }
+        .ta {
+          display: none !important;
+        }
+        #notePrint {
+          display: block;
+          white-space: pre-wrap;
+          font-size: 10px;
+        }
+        .nl {
+          font-size: 9px;
+          font-weight: 600;
+        }
+        .notecard:not(.on) {
+          display: none !important;
+        }
+        .notecard.on {
+          border-top: 1px solid var(--line);
+          padding-top: 2mm;
+        }
+        .sh-foot {
+          display: table-footer-group;
+        }
+        .sh-foot .sh-cell {
+          height: 25mm;
+        }
+        .sigcard {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: 0;
+          background: #fff;
+        }
+        .qwrap {
+          display: flex;
+          align-items: center;
+          gap: 1mm;
+          padding: 0 1mm;
+        }
+        .qwrap input {
+          flex: 1;
+          min-width: 0;
+          font-weight: 600;
+        }
+        .qwrap select {
+          flex: none;
+          width: 13mm;
+          height: auto;
+          text-align: right;
+          font-size: 7.5px;
+          font-weight: 400;
+          color: #888;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="shell">
+        <div class="sh-head">
+          <div class="sh-row">
+            <div class="sh-cell">
+              <header>
+                <h1>فرم بارگیری و مجوز خروج</h1>
+                <img
+                  class="hlogo"
+                  src="./logo.jpeg"
+                  alt="Lomar"
+                  onerror="this.style.display = 'none'"
+                />
+                <div class="meta">تاریخ: <span id="date"></span></div>
+              </header>
 
-<section class="card">
- <div class="frow">
-  <div class="combo">
-   <label>پروژه / کارفرما</label>
-   <input id="q" placeholder="مثلاً: مطری یا 185-08-05" autocomplete="off">
-   <div class="list" id="list"></div>
-  </div>
-  <div><label>کد پروژه</label><input id="pcode" dir="ltr" style="text-align:right" placeholder="کد (دستی)" autocomplete="off"></div>
-  <div><label>کد خروج</label><input id="exit" inputmode="numeric" placeholder="کد خروج"></div>
-  <div><label class="no">&nbsp;</label><label class="perm" id="permBox"><input type="checkbox" id="perm"> <span>مجوز خروج <b style="color:var(--err)">*</b></span></label></div>
- </div>
- <div class="err" id="err"></div>
-</section>
-</div></div></div>
-<div class="sh-body"><div class="sh-row"><div class="sh-cell">
+              <section class="card">
+                <div class="frow">
+                  <div class="combo">
+                    <label>پروژه / کارفرما</label>
+                    <input
+                      id="q"
+                      placeholder="مثلاً: مطری یا 185-08-05"
+                      autocomplete="off"
+                    />
+                    <div class="list" id="list"></div>
+                  </div>
+                  <div>
+                    <label>کد پروژه</label
+                    ><input
+                      id="pcode"
+                      dir="ltr"
+                      style="text-align: right"
+                      placeholder="کد (دستی)"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div>
+                    <label>کد خروج</label
+                    ><input
+                      id="exit"
+                      inputmode="numeric"
+                      placeholder="کد خروج"
+                    />
+                  </div>
+                  <div>
+                    <label class="no">&nbsp;</label
+                    ><label class="perm" id="permBox"
+                      ><input type="checkbox" id="perm" />
+                      <span
+                        >مجوز خروج <b style="color: var(--err)">*</b></span
+                      ></label
+                    >
+                  </div>
+                </div>
+                <div class="err" id="err"></div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="sh-body">
+          <div class="sh-row">
+            <div class="sh-cell">
+              <section class="card">
+                <h2>جدول بارگیری</h2>
+                <div class="tw">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="width: 7%">ردیف</th>
+                        <th>عنوان</th>
+                        <th style="width: 10%">طول (mm)</th>
+                        <th style="width: 10%">عرض (mm)</th>
+                        <th style="width: 10%">ارتفاع (mm)</th>
+                        <th style="width: 28%">مقدار</th>
+                        <th class="no" style="width: 30px"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="rows"></tbody>
+                  </table>
+                </div>
+                <button class="btn add no" id="add">+ افزودن ردیف</button>
+              </section>
 
-<section class="card">
+              <section class="card notecard" id="noteCard">
+                <label class="tg no"
+                  ><input type="checkbox" id="noteOn" /> درج توضیحات در
+                  فرم</label
+                >
+                <div id="noteBox" hidden>
+                  <label class="nl">توضیحات :</label>
+                  <textarea
+                    id="note"
+                    class="ta"
+                    rows="2"
+                    placeholder="توضیحات را اینجا بنویسید…"
+                  ></textarea>
+                  <div id="notePrint"></div>
+                </div>
+              </section>
 
- <div class="tw"><table>
-  <thead><tr><th style="width:7%">ردیف</th><th>عنوان</th><th style="width:10%">طول</th><th style="width:10%">عرض</th><th style="width:10%">ارتفاع</th><th style="width:28%">مقدار</th><th class="no" style="width:30px"></th></tr></thead>
-  <tbody id="rows"></tbody>
- </table></div>
- <button class="btn add no" id="add">+ افزودن ردیف</button>
-</section>
+              <section class="card sigcard">
+                <h2>امضاها</h2>
+                <div class="sigs">
+                  <div class="sig">
+                    <div>
+                      <b>راننده</b><small>بار صحیح و سالم دریافت گردید</small>
+                    </div>
+                    <div class="sf">
+                      <input
+                        id="drv"
+                        list="drivers"
+                        placeholder="نام راننده"
+                        autocomplete="off"
+                      /><input
+                        id="plate"
+                        class="plate"
+                        placeholder="شماره پلاک"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="ln">نام و امضا</div>
+                  </div>
+                  <div class="sig">
+                    <div>
+                      <b>مسئول بارگیری</b
+                      ><small>بارگیری صحیح و سالم انجام شد</small>
+                    </div>
+                    <div class="sf">
+                      <input
+                        id="loader"
+                        placeholder="نام مسئول بارگیری"
+                        autocomplete="off"
+                        value="آقای بیات"
+                      />
+                    </div>
+                    <div class="ln">نام و امضا</div>
+                  </div>
+                  <div class="sig">
+                    <div>
+                      <b>گیرنده بار</b
+                      ><small>بار صحیح و سالم دریافت گردید</small>
+                    </div>
+                    <div class="ln">نام و امضا</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="sh-foot">
+          <div class="sh-row"><div class="sh-cell"></div></div>
+        </div>
+      </div>
+      <div class="bar no">
+        <button class="btn print" id="print">چاپ فرم</button>
+        <button class="btn ghost" id="reset">فرم جدید</button>
+        <button class="btn ghost" id="imp">
+          بارگذاری فهرست کامل پروژه‌ها (JSON)
+        </button>
+        <input type="file" id="file" accept=".json,application/json" hidden />
+        <span
+          style="font-size: 12px; color: var(--mut); align-self: center"
+          id="cnt"
+        ></span>
+      </div>
+    </div>
 
-<section class="card sigcard">
- <h2>امضاها</h2>
- <div class="sigs">
-  <div class="sig"><div><b>راننده</b><small>بار صحیح و سالم دریافت گردید</small></div><div class="ln">نام و امضا</div></div>
-  <div class="sig"><b>مسئول بارگیری</b><small>بارگیری صحیح و سالم انجام شد</small><div class="ln">نام و امضا</div></div>
-  <div class="sig"><div><b>گیرنده بار</b><small>بار صحیح و سالم دریافت گردید</small></div><div class="ln">نام و امضا</div></div>
- </div>
-</section>
-
-</div></div></div>
-<div class="sh-foot"><div class="sh-row"><div class="sh-cell"></div></div></div>
-</div>
-<div class="bar no">
- <button class="btn print" id="print">چاپ فرم</button>
- <button class="btn ghost" id="reset">فرم جدید</button>
- <button class="btn ghost" id="imp">بارگذاری فهرست کامل پروژه‌ها (JSON)</button>
- <input type="file" id="file" accept=".json,application/json" hidden>
- <span style="font-size:12px;color:var(--mut);align-self:center" id="cnt"></span>
-</div>
-</div>
-
-<script>
-const SEED=`آقای علیخانی-پاسداران(185-08-05)
+    <datalist id="drivers"></datalist>
+    <script>
+      const SEED = `آقای علیخانی-پاسداران(185-08-05)
 آقای اورنگ (015-05-05)
 آقای حیدری-یافت آباد(183-08-05)
 آقای بهرامی-بهرامی(171-08-05)
@@ -200,75 +927,233 @@ const SEED=`آقای علیخانی-پاسداران(185-08-05)
 آقای افشاری-صباغ، دندانپزشکی(167-08-05)
 آقای افشاری-صالح آباد(162-08-05)
 آقای مهدی حیدری(165-08-05)
-خاتم-آقای اندیشه(166-08-05)`.split('\n');
-const UNITS=['متر طول','متر مربع','متر مکعب','تعداد','عدد','شاخه','ورق','کیلوگرم','سایر'];
-const $=id=>document.getElementById(id);
-const parse=s=>{const m=s.match(/\((\d{2,4}-\d{2}-\d{2})\)/);return m?{code:m[1],name:s.replace(m[0],'').replace(/\s+/g,' ').trim()}:{code:'',name:s.trim()}};
-let P=SEED.map(parse);
-try{const st=JSON.parse(localStorage.getItem('lumar_projects')||'null');if(st&&st.length)P=st}catch(e){}
-const norm=s=>s.replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).toLowerCase();
-$('date').textContent=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{dateStyle:'long'}).format(new Date());
-const upCnt=()=>$('cnt').textContent=P.length+' پروژه در فهرست';upCnt();
+خاتم-آقای اندیشه(166-08-05)`.split("\n");
+      const UNITS = [
+        "عدد",
+        "متر طول",
+        "متر مربع",
+        "متر مکعب",
+        "تعداد",
+        "شاخه",
+        "ورق",
+        "کیلوگرم",
+        "سایر",
+      ];
+      const $ = (id) => document.getElementById(id);
+      const parse = (s) => {
+        const m = s.match(/\((\d{2,4}-\d{2}-\d{2})\)/);
+        return m
+          ? {
+              code: m[1],
+              name: s.replace(m[0], "").replace(/\s+/g, " ").trim(),
+            }
+          : { code: "", name: s.trim() };
+      };
+      let P = SEED.map(parse);
+      try {
+        const st = JSON.parse(localStorage.getItem("lumar_projects") || "null");
+        if (st && st.length) P = st;
+      } catch (e) {}
+      const norm = (s) =>
+        s
+          .replace(/ي/g, "ی")
+          .replace(/ك/g, "ک")
+          .replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+          .toLowerCase();
+      $("date").textContent = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+        dateStyle: "long",
+      }).format(new Date());
+      const upCnt = () => ($("cnt").textContent = P.length + " پروژه در فهرست");
+      upCnt();
 
-let idx=-1,cur=[];
-function show(){
- const t=norm($('q').value.trim());
- cur=P.filter(p=>norm(p.name+' '+p.code).includes(t)).slice(0,40);idx=-1;
- $('list').innerHTML=cur.length?cur.map((p,i)=>`<div class="opt" data-i="${i}"><span>${p.name}</span><b>${p.code}</b></div>`).join(''):'<div class="opt none">موردی یافت نشد؛ می‌توانید دستی بنویسید</div>';
- if($('q').value.trim())$('list').insertAdjacentHTML('beforeend','<div class="opt man"><span>＋ استفاده از متن واردشده (ورود دستی)</span></div>');
- $('list').classList.add('open');
-}
-let auto=false;
-function pick(p){$('q').value=p.name;$('pcode').value=p.code;auto=true;$('list').classList.remove('open')}
-$('q').addEventListener('input',()=>{if(auto){$('pcode').value='';auto=false}show()});$('q').addEventListener('focus',()=>{$('q').select();show()});
-$('q').addEventListener('keydown',e=>{
- const o=[...$('list').querySelectorAll('.opt[data-i]')];
- if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();idx=Math.max(0,Math.min(o.length-1,idx+(e.key==='ArrowDown'?1:-1)));o.forEach((x,i)=>x.classList.toggle('on',i===idx));o[idx]&&o[idx].scrollIntoView({block:'nearest'})}
- else if(e.key==='Enter'){e.preventDefault();const p=idx>=0?cur[idx]:(cur.length===1?cur[0]:null);if(p)pick(p);else{$('list').classList.remove('open');$('pcode').focus()}}
- else if(e.key==='Escape')$('list').classList.remove('open');
-});
-$('list').addEventListener('mousedown',e=>{if(e.target.closest('.opt.man')){e.preventDefault();$('list').classList.remove('open');$('pcode').focus();return}const o=e.target.closest('.opt[data-i]');if(o)pick(cur[+o.dataset.i])});
-document.addEventListener('click',e=>{if(!e.target.closest('.combo'))$('list').classList.remove('open')});
+      let idx = -1,
+        cur = [];
+      function show() {
+        const t = norm($("q").value.trim());
+        cur = P.filter((p) => norm(p.name + " " + p.code).includes(t)).slice(
+          0,
+          40,
+        );
+        idx = -1;
+        $("list").innerHTML = cur.length
+          ? cur
+              .map(
+                (p, i) =>
+                  `<div class="opt" data-i="${i}"><span>${p.name}</span><b>${p.code}</b></div>`,
+              )
+              .join("")
+          : '<div class="opt none">موردی یافت نشد؛ می‌توانید دستی بنویسید</div>';
+        if ($("q").value.trim())
+          $("list").insertAdjacentHTML(
+            "beforeend",
+            '<div class="opt man"><span>＋ استفاده از متن واردشده (ورود دستی)</span></div>',
+          );
+        $("list").classList.add("open");
+      }
+      let auto = false;
+      function pick(p) {
+        $("q").value = p.name;
+        $("pcode").value = p.code;
+        auto = true;
+        $("list").classList.remove("open");
+      }
+      $("q").addEventListener("input", () => {
+        if (auto) {
+          $("pcode").value = "";
+          auto = false;
+        }
+        show();
+      });
+      $("q").addEventListener("focus", () => {
+        $("q").select();
+        show();
+      });
+      $("q").addEventListener("keydown", (e) => {
+        const o = [...$("list").querySelectorAll(".opt[data-i]")];
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          idx = Math.max(
+            0,
+            Math.min(o.length - 1, idx + (e.key === "ArrowDown" ? 1 : -1)),
+          );
+          o.forEach((x, i) => x.classList.toggle("on", i === idx));
+          o[idx] && o[idx].scrollIntoView({ block: "nearest" });
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          const p = idx >= 0 ? cur[idx] : cur.length === 1 ? cur[0] : null;
+          if (p) pick(p);
+          else {
+            $("list").classList.remove("open");
+            $("pcode").focus();
+          }
+        } else if (e.key === "Escape") $("list").classList.remove("open");
+      });
+      $("list").addEventListener("mousedown", (e) => {
+        if (e.target.closest(".opt.man")) {
+          e.preventDefault();
+          $("list").classList.remove("open");
+          $("pcode").focus();
+          return;
+        }
+        const o = e.target.closest(".opt[data-i]");
+        if (o) pick(cur[+o.dataset.i]);
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".combo")) $("list").classList.remove("open");
+      });
 
-function addRow(){
- const tr=document.createElement('tr');
- tr.innerHTML=`<td class="n"></td><td><input></td><td><input type="number" step="any" min="0"></td><td><input type="number" step="any" min="0"></td><td><input type="number" step="any" min="0"></td><td><div class="qwrap"><input type="number" step="any" min="0"><select>${UNITS.map(u=>`<option>${u}</option>`).join('')}</select></div></td><td class="no"><button class="x" title="حذف">×</button></td>`;
- tr.querySelector('.x').onclick=()=>{tr.remove();num()};
- $('rows').appendChild(tr);num();
-}
-function num(){[...$('rows').children].forEach((r,i)=>r.querySelector('.n').textContent=(i+1).toLocaleString('fa-IR'))}
-$('add').onclick=addRow;
-for(let i=0;i<8;i++)addRow();
+      function addRow() {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="n"></td><td><input></td><td><input type="number" step="any" min="0"></td><td><input type="number" step="any" min="0"></td><td><input type="number" step="any" min="0"></td><td><div class="qwrap"><input type="number" step="any" min="0"><select>${UNITS.map((u) => `<option>${u}</option>`).join("")}</select></div></td><td class="no"><button class="x" title="حذف">×</button></td>`;
+        tr.querySelector(".x").onclick = () => {
+          tr.remove();
+          num();
+        };
+        $("rows").appendChild(tr);
+        num();
+      }
+      function num() {
+        [...$("rows").children].forEach(
+          (r, i) =>
+            (r.querySelector(".n").textContent = (i + 1).toLocaleString(
+              "fa-IR",
+            )),
+        );
+      }
+      $("add").onclick = addRow;
+      for (let i = 0; i < 1; i++) addRow();
 
-$('perm').addEventListener('change',()=>{if($('perm').checked){$('permBox').classList.remove('bad');$('err').textContent=''}});
-$('print').onclick=()=>{
- const m=[];
- if(!$('q').value.trim())m.push('پروژه را انتخاب کنید.');
- if(!$('exit').value.trim())m.push('کد خروج را وارد کنید.');
- if(!$('perm').checked){m.push('تیک «مجوز خروج» باید زده شده باشد.');$('permBox').classList.add('bad')}
- $('err').textContent=m.join(' ');
- if(m.length){window.scrollTo({top:0,behavior:'smooth'});return}
- window.print();
-};
-$('reset').onclick=()=>{
- ['pcode','exit','q'].forEach(i=>$(i).value='');$('err').textContent='';
- $('perm').checked=false;$('permBox').classList.remove('bad');$('rows').innerHTML='';for(let i=0;i<8;i++)addRow();
-};
-addEventListener('beforeprint',()=>{
- let st=$('pn');if(!st){st=document.createElement('style');st.id='pn';document.head.appendChild(st)}
- const c=t=>String(t).replace(/["\\\n]/g,''),code=c($('pcode').value),date=c($('date').textContent),f='font:10px Vazirmatn,Tahoma,sans-serif;color:#444;';
- st.textContent=`@page{@bottom-center{content:"صفحه " counter(page,persian) " از " counter(pages,persian);${f}}@bottom-right{content:"فرم بارگیری لومار${code?' – پروژه '+code:''}";${f}}@bottom-left{content:"${date}";${f}}}`;
-});
-$('imp').onclick=()=>$('file').click();
-$('file').onchange=async e=>{
- try{
-  const j=JSON.parse(await e.target.files[0].text());
-  const arr=(j.summaries||j).filter(x=>x&&(x.project_title||x.name)&&!x.is_archived).map(x=>parse(x.project_title||x.name));
-  if(!arr.length)throw 0;
-  P=arr;upCnt();
-  try{localStorage.setItem('lumar_projects',JSON.stringify(P))}catch(_){}
- }catch(_){alert('فایل JSON معتبر نیست.')}
-};
-</script>
-</body>
+      $("perm").addEventListener("change", () => {
+        if ($("perm").checked) {
+          $("permBox").classList.remove("bad");
+          $("err").textContent = "";
+        }
+      });
+      $("print").onclick = () => {
+        const m = [];
+        if (!$("q").value.trim()) m.push("پروژه را انتخاب کنید.");
+        if (!$("exit").value.trim()) m.push("کد خروج را وارد کنید.");
+        if (!$("perm").checked) {
+          m.push("تیک «مجوز خروج» باید زده شده باشد.");
+          $("permBox").classList.add("bad");
+        }
+        $("err").textContent = m.join(" ");
+        if (m.length) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        window.print();
+      };
+      $("reset").onclick = () => {
+        ["pcode", "exit", "q", "drv", "plate", "loader", "note"].forEach(
+          (i) => ($(i).value = ""),
+        );
+        $("err").textContent = "";
+        $("perm").checked = false;
+        $("permBox").classList.remove("bad");
+        $("noteOn").checked = false;
+        $("noteBox").hidden = true;
+        $("noteCard").classList.remove("on");
+        $("rows").innerHTML = "";
+        for (let i = 0; i < 1; i++) addRow();
+      };
+      addEventListener("beforeprint", () => {
+        $("notePrint").textContent = $("note").value;
+        let st = $("pn");
+        if (!st) {
+          st = document.createElement("style");
+          st.id = "pn";
+          document.head.appendChild(st);
+        }
+        const c = (t) => String(t).replace(/["\\\n]/g, ""),
+          code = c($("pcode").value),
+          date = c($("date").textContent),
+          f = "font:10px Vazirmatn,Tahoma,sans-serif;color:#444;";
+        st.textContent = `@page{@bottom-center{content:"صفحه " counter(page,persian) " از " counter(pages,persian);${f}}@bottom-right{content:"فرم بارگیری لومار${code ? " – پروژه " + code : ""}";${f}}@bottom-left{content:"${date}";${f}}}`;
+      });
+      const DRV = [
+        ["آقای عبدی", "51و928-50"],
+        ["آقای جمالی", "15ل778-60"],
+        ["آقای ارزانی", "25و288-40"],
+        ["آقای کرمانی", "12ج872-60"],
+        ["آقای محسنی", "29ع962-66"],
+        ["آقای خاتم", "88ج819-60"],
+      ];
+      $("drivers").innerHTML = DRV.map((d) => `<option value="${d[0]}">`).join(
+        "",
+      );
+      $("drv").addEventListener("input", () => {
+        const d = DRV.find((x) => x[0] === $("drv").value.trim());
+        if (d) $("plate").value = d[1];
+      });
+      $("plate").addEventListener("blur", () => {
+        $("plate").value = $("plate")
+          .value.replace(/\s+/g, "")
+          .replace(/_/g, "-");
+      });
+      $("noteOn").addEventListener("change", () => {
+        const on = $("noteOn").checked;
+        $("noteBox").hidden = !on;
+        $("noteCard").classList.toggle("on", on);
+        if (on) $("note").focus();
+      });
+      $("imp").onclick = () => $("file").click();
+      $("file").onchange = async (e) => {
+        try {
+          const j = JSON.parse(await e.target.files[0].text());
+          const arr = (j.summaries || j)
+            .filter((x) => x && (x.project_title || x.name) && !x.is_archived)
+            .map((x) => parse(x.project_title || x.name));
+          if (!arr.length) throw 0;
+          P = arr;
+          upCnt();
+          try {
+            localStorage.setItem("lumar_projects", JSON.stringify(P));
+          } catch (_) {}
+        } catch (_) {
+          alert("فایل JSON معتبر نیست.");
+        }
+      };
+    </script>
+  </body>
 </html>
